@@ -2,6 +2,7 @@
 #include "StreamConductor.hpp"
 #include <vector>
 #include "BeatmapNoteType.hpp"
+#include "SceneObject.hpp"
 
 #define BB_STATE_REST 0
 #define BB_STATE_SHORT_LAUNCH 1
@@ -10,8 +11,7 @@
 #define BB_STATE_GOOD 4
 #define BB_STATE_MISS 5
 
-class Baseball
-{
+class Baseball : public SceneObject {
 
 typedef struct {
     float timestamp;

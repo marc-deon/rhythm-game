@@ -24,8 +24,7 @@ struct Beatmap_Note {
     bool triggered = false;
 };
 
-class BeatmapWithVisualizer
-{
+class BeatmapWithVisualizer {
 private:
     // Credits type stuff
     char* header_title;

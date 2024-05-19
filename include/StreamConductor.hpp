@@ -1,8 +1,9 @@
 #pragma once
 #include <raylib.h>
+#include "Conductor.hpp"
 
-class StreamConductor
-{
+class StreamConductor : public Conductor {
+
 private:
     Music stream;
     float volume = 1.0;
@@ -25,7 +26,7 @@ public:
     Music GetStream();
     bool IsPlaying();
     void Update();
-    void Metronome();
+    // void Metronome();
     void Start();
     void Pause();
     void Resume();

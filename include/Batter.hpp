@@ -1,8 +1,8 @@
 #pragma once
 #include "StreamConductor.hpp"
+#include "SceneObject.hpp"
 
-class Batter
-{
+class Batter : public SceneObject {
 private:
     Texture texture;
     Rectangle size = {0, 0, 109, 129};     // Width and height of a single drawing
