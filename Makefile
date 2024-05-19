@@ -5,7 +5,7 @@ CPPFLAGS=-ggdb -pedantic -std=c++17 -I./raylib/include
 # LIBS=`pkg-config --static --libs $(PKGS)`
 SOURCES=$(wildcard src/*.cpp)
 WARNINGS=-Wall -Wextra
-IGNORES=-Wno-parentheses -Wno-narrowing -Wno-write-strings -Wno-missing-field-initializers
+IGNORES=-Wno-parentheses -Wno-narrowing -Wno-write-strings -Wno-missing-field-initializers -Wno-sign-compare -Wno-vla -Wno-format
 
 rhythm: src/*.cpp include/*.hpp
 #	g++ $(WARNINGS) $(IGNORES) $(CPPFLAGS) -o rhythm $(SOURCES) -I ./include $(LIBS)
