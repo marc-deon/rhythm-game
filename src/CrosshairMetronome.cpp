@@ -64,7 +64,6 @@ float CrosshairMetronome::GetErrorRange() {
 
 
 
-// TODO: Change this to support perfect/good/Bad
 int CrosshairMetronome::CheckInRange() {
     // Some nonsense to do modulo on float
     float beatpos = conductor->GetSongBeatPosition();

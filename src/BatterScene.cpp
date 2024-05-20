@@ -1,14 +1,12 @@
 #include "BatterScene.hpp"
-
+#include "SceneManager.hpp"
 
 BatterScene::BatterScene() {
     name = "Batter";
     conductor.Start();
 }
 
-void BatterScene::Exit() {
-
-} 
+void BatterScene::Exit() { } 
 
 void BatterScene::Update() {
     conductor.Update();
@@ -34,6 +32,11 @@ void BatterScene::Update() {
             PlaySound(se_bad);
             baseball.PlayBad();
         }
+    }
+
+    if (IsKeyPressed(KEY_END)) {
+        SceneManager::ReplaceScene(SCENE_MAINMENU);
+        return;
     }
 }
 

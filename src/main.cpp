@@ -22,7 +22,7 @@ void InitAudio() {
 int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "maqo's rhythm game");
     InitAudio();
-    SetTargetFPS(60);
+    SetTargetFPS(100);
 
     SceneManager::ReplaceScene(SCENE_MAINMENU);
 

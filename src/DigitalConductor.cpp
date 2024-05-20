@@ -16,10 +16,15 @@ float DigitalConductor::GetSongBeatPosition() {
     return elapsed_time * bpm / 60.0f;
 }
 
-// If this drifts over time, we could also try using Raylib::GetTime() and subtracting the start time
+// void DigitalConductor::SetBpm(float bpm){
+//     this->bpm = bpm;
+//     crotchet = 60/bpm;
+//     // BUG: This will cause errors if not done exactly on beat!
+//     elapsed_time = 0;
+// }
+
 void DigitalConductor::Update() {
     elapsed_time += GetFrameTime();
-    
 }
 
 void DigitalConductor::Start() {
@@ -40,4 +45,13 @@ int DigitalConductor::GetInteger() {
 
 float DigitalConductor::GetFractional() {
     return elapsed_time - (int) elapsed_time;
+}
+
+int DigitalConductor::GetIntegerBeat() {
+    return (int) (elapsed_time * bpm / 60.0f);
+}
+
+float DigitalConductor::GetFractionalBeat() {
+    float beat = elapsed_time * bpm / 60.0f;
+    return beat - (int) beat;
 }

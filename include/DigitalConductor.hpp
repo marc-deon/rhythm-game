@@ -18,6 +18,7 @@ class DigitalConductor : public Conductor {
     void Resume() override;
     int GetInteger() override;
     float GetFractional() override;
+    int GetIntegerBeat();
+    float GetFractionalBeat();
     // void SetBpm(float bpm) override;
-
 };
