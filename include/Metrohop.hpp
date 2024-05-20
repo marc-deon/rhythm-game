@@ -22,5 +22,6 @@ class Metrohop : public Scene {
     void Update() override;
     void Draw() override;
     Metrohop();
+    ~Metrohop();
 
 };

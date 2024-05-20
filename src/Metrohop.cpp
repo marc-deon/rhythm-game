@@ -8,6 +8,13 @@
 #define HIT_GOOD 2
 #define HIT_BAD 3
 
+Metrohop::~Metrohop() {
+    for(auto c : children) {
+        delete c;
+    }
+    children.clear();
+}
+
 Metrohop::Metrohop() {
     name = "Metrohop";
 
