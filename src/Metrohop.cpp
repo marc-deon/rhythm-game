@@ -8,7 +8,6 @@
 #define HIT_GOOD 2
 #define HIT_BAD 3
 
-
 Metrohop::Metrohop() {
     name = "Metrohop";
 
@@ -45,12 +44,47 @@ int Metrohop::CheckInRange() {
         return HIT_BAD;
 }
 
-void Lose() {
-    exit(0);
+void Metrohop::Lose() {
+    display_score_screen = true;
 }
 
-int last_beat_tapped = 0;
-void Metrohop::Update(){
+void Metrohop::DisplayScoreScreen() {
+    int x, y;    // Location of various texts
+    char sp[12]; // perfect string
+    char sg[12]; // great string
+    sprintf(sp, "%d PERFECTS", score_perfect);
+    sprintf(sg, "%d GOODS", score_good);
+
+    // Center horizontally
+    x = 800/2 - MeasureText("YOU SCORED:", 36)/2;
+    // Place a fifth down the screen
+    y = 600/5 - 36/2;
+    // Draw text, with about 12 pixels between each line
+    DrawText("YOU SCORED:", x, y, 36, WHITE);
+    DrawText(sp, x, y+=48, 24, WHITE);
+    DrawText(sg, x, y+=36, 24, WHITE);
+
+    // Get the starting point
+    x = 800 - 20 - MeasureText("PRESS Z TO CONTINUE", 16);
+    y = 600 - 20 - 16;
+    // Draw partial text                        Update horizontal
+    DrawText("PRESS ", x, y, 16, WHITE);        x += MeasureText("PRESS ", 16);
+    DrawText("Z", x, y, 16, GREEN);             x += MeasureText("Z", 16);
+    DrawText(" TO CONTINUE", x, y, 16, WHITE);
+
+}
+
+void Metrohop::Update() {
+
+    if (display_score_screen) {
+
+        if (IsKeyPressed(KEY_Z)) {
+            SceneManager::ReplaceScene(SCENE_MAINMENU);
+        }
+        
+        return;
+    }
+
     if (IsKeyPressed(KEY_END)) {
         SceneManager::ReplaceScene(SCENE_MAINMENU);
     }
@@ -72,21 +106,15 @@ void Metrohop::Update(){
             Lose();
             printf("%f, Bad\n", current_beat);
         }
-        else if (abs(attempt) == HIT_GOOD) {
+        else {
             last_beat_tapped = attempt > 0 ? int_beat : int_beat+1;
-            score+=1;
+            score_perfect += abs(attempt) == HIT_PERFECT;
+            score_good += abs(attempt) == HIT_GOOD;
             // TODO: Figure out how to nicely change BPM
+            // Maybe instead of doing elaspsed_time, we have elapsed_beats as our fundamental?
             // if (score % 2 == 0)
             //     conductor.SetBpm(conductor.GetBpm()+10);
-            printf("%f, Good\n", current_beat);
-        }
-        else if (abs(attempt) == HIT_PERFECT) {
-            last_beat_tapped = attempt > 0 ? int_beat : int_beat+1;
-            score+=1;
-            // TODO: Figure out how to nicely change BPM
-            // if (score % 2 == 0)
-            //     conductor.SetBpm(conductor.GetBpm()+10);
-            printf("%f, Perfect\n", current_beat);
+            printf("%f, OK\n", current_beat);
         }
     }
 
@@ -99,7 +127,6 @@ void Metrohop::Update(){
         Lose();
     }
 
-
     // Update children
     Scene::Update();
 }
@@ -107,9 +134,14 @@ void Metrohop::Update(){
 void Metrohop::Draw(){
     ClearBackground(BLACK);
 
+    if (display_score_screen) {
+        DisplayScoreScreen();
+        return;
+    }
+
     // Draw score
     char s[12] = {0};
-    sprintf(s, "Score: %d", score);
+    sprintf(s, "Score: %d", score_good + score_perfect);
     float width = MeasureText(s, 24);
     DrawText(s, 800/2 - width/2, 0, 24, WHITE);
     

@@ -6,10 +6,14 @@
 
 class Metrohop : public Scene {
     private:
-    int score = 0;
+    bool display_score_screen = false;
+    int score_perfect = 0;
+    int score_good = 0;
+    int last_beat_tapped = 0;
     DigitalConductor conductor;
 
-    void DisplayScore(); // After player loses, swap to a subscene that just shows score
+    void DisplayScoreScreen(); // After player loses, swap to a subscene that just shows score
+    void Lose();
     void Exit(); // Aftter viewing score, tear down and go back to main menu
     float GetErrorRange();
     int CheckInRange();
