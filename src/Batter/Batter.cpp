@@ -7,7 +7,6 @@ Batter::Batter() {
 }
 
 Batter::~Batter() {
-    printf("UNLOAD BATTER\n");
     UnloadTexture(texture);
 }
 

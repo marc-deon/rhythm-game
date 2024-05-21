@@ -21,11 +21,3 @@ void Metro_Light::Draw() {
     float y = 600 * 10.f/30.f - h;
     DrawRectangle(x, y, w, h, color_current);
 }
-
-Metro_Light::~Metro_Light() {
-    printf("Metro light deconstruct\n");
-}
-
-// int Metro_Light::Update() {
-//     return 0;
-// }

@@ -8,7 +8,6 @@ BatterScene::BatterScene() {
 }
 
 BatterScene::~BatterScene() {
-    printf("UNLOADED BATTERSCENE 3 SFX\n");
     UnloadSound(se_bad);
     UnloadSound(se_good);
     UnloadSound(se_perfect);
@@ -27,15 +26,13 @@ void BatterScene::Update() {
         }
         return;
     }
-    printf("conductor bpm: %f\n", conductor.GetBpm());
-    printf("conductor crotchet: %f\n", conductor.GetCrotchet());
 
     conductor.Update();
     metronome.Update();
     auto cue = beatmap.Update();
-    // printf("Isplaying: %d\n", conductor.IsPlaying());
     if (cue.main == SONG_END || !conductor.IsPlaying()) {
         should_display_score = true;
+        misc_timer = 0;
         return;
     }
 
@@ -87,7 +84,8 @@ void BatterScene::DisplayScore() {
     y = 600/5 - 36/2;
     // Draw text, with about 12 pixels between each line
     DrawText("YOU DID...", x, y, 36, WHITE);
-    DrawText(rating, x, y+=48, 24, WHITE);
+    if(misc_timer > 1)
+        DrawText(rating, x, y+=48, 24, WHITE);
 
     // Get the starting point
     x = 800 - 20 - MeasureText("PRESS Z TO CONTINUE", 16);

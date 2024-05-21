@@ -13,7 +13,6 @@ Metrohop::~Metrohop() {
         delete c;
     }
     children.clear();
-    printf("metrohop deconstructed\n");
 }
 
 Metrohop::Metrohop() {
@@ -118,7 +117,6 @@ void Metrohop::Update() {
         
         if (abs(attempt) == HIT_BAD){
             Lose();
-            printf("%f, Bad\n", current_beat);
         }
         else {
             last_beat_tapped = attempt > 0 ? int_beat : int_beat+1;
@@ -128,7 +126,6 @@ void Metrohop::Update() {
             // Maybe instead of doing elaspsed_time, we have elapsed_beats as our fundamental?
             // if (score % 2 == 0)
             //     conductor.SetBpm(conductor.GetBpm()+10);
-            printf("%f, OK\n", current_beat);
         }
     }
 

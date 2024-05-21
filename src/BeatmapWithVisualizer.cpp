@@ -45,8 +45,6 @@ BeatmapWithVisualizer::BeatmapWithVisualizer(StreamConductor* conductor, char* p
     if (header_element = strstr(header, "bpm:")) {
         sscanf(header_element, "bpm: %f\n", &header_bpm);
         conductor->SetBpm(header_bpm);
-        printf("Set bpm from header to %f\n", header_bpm);
-        // exit(0);
     }
 
     if (header_element = strstr(header, "composer:")) {

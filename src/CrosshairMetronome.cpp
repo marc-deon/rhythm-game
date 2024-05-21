@@ -5,7 +5,6 @@ CrosshairMetronome::CrosshairMetronome() {
 }
 
 CrosshairMetronome::~CrosshairMetronome() {
-    printf("UNLOAD CROSSHAIR 3\n");
     // UnloadSound(se_bad);
     // UnloadSound(se_good);
     // UnloadSound(se_perfect);
