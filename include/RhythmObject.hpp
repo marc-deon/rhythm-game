@@ -6,6 +6,4 @@
 class RhythmObject : public SceneObject {
     public:
     Conductor* conductor;
-    int virtual Update() override {return 0;};
-    
 };

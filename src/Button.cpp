@@ -24,21 +24,15 @@ void TextButton::Draw() {
     ); 
 }
 
-int TextButton::Update() {
-    int val;
-    val = UiElement::Update();
-    if (val)
-        return val;
+void TextButton::Update() {
+    UiElement::Update();
 
     if (FocusStack::IsNotFocused(this))
-        return 0;
+        return;
 
     if (IsKeyPressed(KEY_Z) && cb_onPress) {
-        auto val = cb_onPress();
-        if (val)
-            return val;
+        cb_onPress();
     }   
-    return val;
 }
 
 TextButton::TextButton(int x, int y, std::string text){
@@ -47,7 +41,7 @@ TextButton::TextButton(int x, int y, std::string text){
     this->text = text;
 }
 
-TextButton::TextButton(int x, int y, std::string text, int (*onPress)()){
+TextButton::TextButton(int x, int y, std::string text, void (*onPress)()){
     this->x = x;
     this->y = y;
     this->text = text;

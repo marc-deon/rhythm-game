@@ -3,12 +3,10 @@
 #include <raylib.h>
 #include <stdio.h>
 
-int UiElement::Update() {
-    // printf("    UiElement.Update\n");
+void UiElement::Update() {
     if (! FocusStack::IsFocused(this))
-        return 0;
+        return;
     
-    // printf("Focused\n");
     if (IsKeyPressed(KEY_UP) && up)
         FocusStack::ChangeTo(up);
     else if (IsKeyPressed(KEY_DOWN) && down)
@@ -17,5 +15,4 @@ int UiElement::Update() {
         FocusStack::ChangeTo(left);
     else if (IsKeyPressed(KEY_RIGHT) && right)
         FocusStack::ChangeTo(right);
-    return 0;
 }

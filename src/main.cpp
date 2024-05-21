@@ -13,22 +13,37 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
-
 void InitAudio() {
     InitAudioDevice();
 }
 
+// #define LEAKTEST
+void leaktest() {
+    int i = 0;
+    while (true) {
+        SceneManager::ReplaceScene((SCENES)i);
+        SceneManager::CheckToReplace();
+        i++;
+        i %= SCENE_MAX_COUNT;
+    }
+
+}
 
 int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "maqo's rhythm game");
     InitAudio();
     SetTargetFPS(100);
 
+    #ifdef LEAKTEST
+    leaktest();
+    return 0;
+    #endif
+
     SceneManager::ReplaceScene(SCENE_MAINMENU);
 
     while (!WindowShouldClose()) {
-        // SceneManager::ReplaceScene(SCENE_MAINMENU);
-        // SceneManager::ReplaceScene(SCENE_METROHOP);
+        SceneManager::CheckToReplace();
+        
         if (SceneManager::GetCurrent() == NULL) {
             printf("Game exited due to no current scene\n");
             break;

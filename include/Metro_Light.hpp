@@ -14,5 +14,5 @@ class Metro_Light : public RhythmObject {
     ~Metro_Light();
     Metro_Light(Conductor* c, Color active, Color inactive, float beat);
     void Draw();
-    // int Update();
+    // void Update();
 };

@@ -13,7 +13,7 @@ BatterScene::~BatterScene() {
     UnloadSound(se_perfect);
 }
 
-int BatterScene::Update() {
+void BatterScene::Update() {
     conductor.Update();
     metronome.Update();
     auto cue = beatmap.Update();
@@ -41,9 +41,8 @@ int BatterScene::Update() {
 
     if (IsKeyPressed(KEY_END)) {
         SceneManager::ReplaceScene(SCENE_MAINMENU);
-        return -1;
+        return;
     }
-    return 0;
 }
 
 void BatterScene::Draw() {

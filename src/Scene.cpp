@@ -8,14 +8,10 @@ Scene::~Scene() {
     children.clear();
 }
 
-int Scene::Update() {
+void Scene::Update() {
     for (auto child : children) {
-        // Return -1 when this loop is no longer valid (e.g. switching scenes)
-        auto val = child->Update();
-        if (val)
-            return val;
+        child->Update();
     }
-    return 0;
 }
 
 void Scene::Draw() {

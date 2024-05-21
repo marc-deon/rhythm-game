@@ -15,7 +15,7 @@ Metronome::Metronome(Conductor* c, int beats_per_measure, float offset) {
     sound = LoadSound("sfx/metronome.wav");
 }
 
-int Metronome::Update(){
+void Metronome::Update(){
     float crotchet = conductor->GetCrotchet();
     if (conductor->GetSongTimePosition() > lastbeat + crotchet) {
         if ((int)conductor->GetSongBeatPosition() % beats_per_measure == 0) {
@@ -28,7 +28,6 @@ int Metronome::Update(){
         }
         lastbeat += crotchet;
     }
-    return 0;
 }
 
 void Metronome::Draw() {}

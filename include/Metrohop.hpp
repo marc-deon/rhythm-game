@@ -19,7 +19,7 @@ class Metrohop : public Scene {
     int CheckInRange();
 
     public:
-    int Update() override;
+    void Update() override;
     void Draw() override;
     Metrohop();
     ~Metrohop();

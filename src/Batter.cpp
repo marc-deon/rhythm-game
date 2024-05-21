@@ -17,10 +17,6 @@ void Batter::Anim_Reset() {
     playing = false;
 }
 
-int Batter::Update() {
-    return 0;
-}
-
 void Batter::Draw() {
     float scale = 2;
 

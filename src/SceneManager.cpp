@@ -5,17 +5,17 @@
 
 namespace SceneManager {
     static Scene* currentScene = NULL;
+    static Scene* nextScene = NULL;
 
     // Main menu button callback
-    int cb_Metrohop() {
+    void cb_Metrohop() {
         SceneManager::ReplaceScene(SCENE_METROHOP);
-        return -1;
     }
 
     // Main menu button callback
-    int cb_Batter() {
+    void cb_Batter() {
         SceneManager::ReplaceScene(SCENE_BATTER);
-        return -1;
+        
     }
 
     Scene* CreateScene_MainMenu() {
@@ -31,36 +31,40 @@ namespace SceneManager {
         return s;
     }
 
-    // Replace current scene by enum
+    void CheckToReplace() {
+        // Check if we should swap
+        if (nextScene == NULL)
+            return;
+        
+        // This is supposedly safe to do even if null
+        delete currentScene;
+        
+        // Do the swap
+        currentScene = nextScene;
+
+        // Reset nextScene so this doesn't run twice in a row
+        nextScene = NULL;
+
+        // We don't need to deallocate anything in the FS; that's handled above
+        FocusStack::Clear();
+        FocusStack::Push(currentScene->firstFocused);
+    }
+
+    // Queue scene replacement by enum
     void ReplaceScene(SCENES scene) {
-        Scene* s;
         switch (scene) {
             case SCENE_MAINMENU:
-                s = CreateScene_MainMenu();
+                nextScene = CreateScene_MainMenu();
                 break;
             case SCENE_METROHOP:
-                s = new Metrohop();
+                nextScene = new Metrohop();
                 break;
             case SCENE_BATTER:
-                s = new BatterScene();
+                nextScene = new BatterScene();
                 break;
             default:
                 exit(1);
         }
-        ReplaceScene(s);
-    }
-    
-    // Replace current scene by pointer to already-constructed scene
-    void ReplaceScene(Scene* scene) {
-        if(currentScene) {
-            printf("deleting current scene %s\n", currentScene->name);
-            delete currentScene;
-            currentScene = NULL;
-        }
-        currentScene = scene;
-        // We don't need to deallocate anything in the FS; that's handled above
-        FocusStack::Clear();
-        FocusStack::Push(currentScene->firstFocused);
     }
 
     Scene* GetCurrent() {

@@ -82,21 +82,21 @@ void Metrohop::DisplayScoreScreen() {
 
 }
 
-int Metrohop::Update() {
+void Metrohop::Update() {
 
     if (display_score_screen) {
 
         if (IsKeyPressed(KEY_Z)) {
             SceneManager::ReplaceScene(SCENE_MAINMENU);
-            return -1;
+            return;
         }
         
-        return 0;
+        return;
     }
 
     if (IsKeyPressed(KEY_END)) {
         SceneManager::ReplaceScene(SCENE_MAINMENU);
-        return -1;
+        return;
     }
 
     conductor.Update();
@@ -138,7 +138,7 @@ int Metrohop::Update() {
     }
 
     // Update children
-    return Scene::Update();
+    Scene::Update();
 }
 
 void Metrohop::Draw(){

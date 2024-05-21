@@ -30,7 +30,7 @@ class BatterScene : public Scene {
     void DisplayScore(); // After player loses, swap to a subscene that just shows score
 
     public:
-    int Update() override;
+    void Update() override;
     void Draw() override;
     BatterScene();
     ~BatterScene();

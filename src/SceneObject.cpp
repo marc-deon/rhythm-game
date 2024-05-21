@@ -1,13 +1,10 @@
 #include "SceneObject.hpp"
 #include "stdio.h"
 
-int SceneObject::Update() {
+void SceneObject::Update() {
     for (auto child : children) {
-        auto val = child.Update();
-        if (val)
-            return val;
+        child.Update();
     }
-    return 0;
 }
 
 

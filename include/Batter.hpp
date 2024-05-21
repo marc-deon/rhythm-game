@@ -16,7 +16,6 @@ private:
 public:
     Batter();
     ~Batter();
-    int Update();
     void Draw();
     void Swing();
 };

@@ -6,7 +6,7 @@ class SceneObject {
         int x;
         int y;
         std::vector<SceneObject> children;
-        virtual int Update();
+        virtual void Update();
         virtual void Draw();
         virtual ~SceneObject();
     };
