@@ -2,6 +2,7 @@
 #include "Metrohop/Metro_Light.hpp"
 #include "Metronome.hpp"
 #include "SceneManager.hpp"
+#include "InputDisplay.hpp"
 
 // Use negatives for early
 #define HIT_PERFECT 1
@@ -24,6 +25,7 @@ Metrohop::Metrohop() {
     children.push_back(new Metro_Light(&conductor, YELLOW, ORANGE, 2));
     children.push_back(new Metro_Light(&conductor, RED, DARKRED, 3));
     children.push_back(new Metronome(&conductor, 3));
+    children.push_back(new InputDisplay());
 }
 
 

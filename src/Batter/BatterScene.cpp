@@ -99,6 +99,7 @@ void BatterScene::DisplayScore() {
 
 void BatterScene::Draw() {
     ClearBackground(BLACK);
+    inputdisplay.Draw();
     
     if (should_display_score) {
         DisplayScore();

@@ -7,6 +7,7 @@
 #include "Baseball.hpp"
 #include "Batter.hpp"
 #include "Metronome.hpp"
+#include "InputDisplay.hpp"
 
 class BatterScene : public Scene {
     private:
@@ -26,7 +27,8 @@ class BatterScene : public Scene {
     Metronome metronome = Metronome(&conductor);
     Batter batter;
     Baseball baseball;
-    
+    InputDisplay inputdisplay;
+
     void DisplayScore(); // After player loses, swap to a subscene that just shows score
 
     public:

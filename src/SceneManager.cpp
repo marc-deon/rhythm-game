@@ -1,7 +1,7 @@
 #include "SceneManager.hpp"
 #include "Metrohop/Metrohop.hpp"
 #include "Batter/BatterScene.hpp"
-
+#include "InputDisplay.hpp"
 
 namespace SceneManager {
     static Scene* currentScene = NULL;
@@ -28,6 +28,7 @@ namespace SceneManager {
         s->children.push_back(b1);
         s->children.push_back(b2);
         s->firstFocused = b1;
+        s->children.push_back(new InputDisplay());
         return s;
     }
 
