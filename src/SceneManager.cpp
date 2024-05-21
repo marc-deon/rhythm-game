@@ -1,6 +1,6 @@
 #include "SceneManager.hpp"
-#include "Metrohop.hpp"
-#include "BatterScene.hpp"
+#include "Metrohop/Metrohop.hpp"
+#include "Batter/BatterScene.hpp"
 
 
 namespace SceneManager {

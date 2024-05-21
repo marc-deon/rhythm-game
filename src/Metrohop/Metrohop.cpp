@@ -1,6 +1,6 @@
-#include "Metrohop.hpp"
+#include "Metrohop/Metrohop.hpp"
+#include "Metrohop/Metro_Light.hpp"
 #include "Metronome.hpp"
-#include "Metro_Light.hpp"
 #include "SceneManager.hpp"
 
 // Use negatives for early

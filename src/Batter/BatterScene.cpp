@@ -1,4 +1,4 @@
-#include "BatterScene.hpp"
+#include "Batter/BatterScene.hpp"
 #include "SceneManager.hpp"
 
 BatterScene::BatterScene() {

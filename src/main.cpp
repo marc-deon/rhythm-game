@@ -4,8 +4,8 @@
 #include "Metronome.hpp"
 #include "CrosshairMetronome.hpp"
 #include "BeatmapWithVisualizer.hpp"
-#include "Batter.hpp"
-#include "Baseball.hpp"
+#include "Batter/Batter.hpp"
+#include "Batter/Baseball.hpp"
 #include "Scene.hpp"
 #include "SceneManager.hpp"
 #include <stdlib.h>

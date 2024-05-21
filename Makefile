@@ -3,7 +3,7 @@
 # CPPFLAGS=-ggdb -pedantic -std=c++17 `pkg-config --static --cflags $(PKGS)`
 CPPFLAGS=-ggdb -pedantic -std=c++17 -I./raylib/include
 # LIBS=`pkg-config --static --libs $(PKGS)`
-SOURCES=$(wildcard src/*.cpp)
+SOURCES=$(wildcard src/*.cpp) $(wildcard src/**/*.cpp)
 WARNINGS=-Wall -Wextra
 IGNORES=-Wno-parentheses -Wno-narrowing -Wno-write-strings -Wno-missing-field-initializers -Wno-sign-compare -Wno-vla -Wno-format
 
