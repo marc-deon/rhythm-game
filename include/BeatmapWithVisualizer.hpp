@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "StreamConductor.hpp"
-#include "BeatmapNoteType.hpp"
+#include "BeatmapNote.hpp"
 
 #define HIT_PERFECT 0
 #define HIT_GOOD 1
@@ -17,13 +17,6 @@ enum BEATMAP_EVENT_TYPE {
     NEW_TIME_SIG,
     SONG_END
 
-};
-
-// TODO: Probably make a subclass of events (also make an event struct)
-struct Beatmap_Note {
-    float seconds; // time to trigger this note
-    Beatmap_Note_Type type;
-    bool triggered = false;
 };
 
 class BeatmapWithVisualizer {

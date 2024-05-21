@@ -175,9 +175,10 @@ Beatmap_Note_Type BeatmapWithVisualizer::Update() {
 
 
     for (Beatmap_Note& note : notes) {
-        if (note.seconds < current_time && note.type.main != NOTE && !note.triggered) {
+        if (note.seconds < current_time && note.type.main != NOTE && !note.triggered && !note.tapped) {
             note.triggered = true;
             cue = note.type;
+            // cue.note = &note;
             break;
         }
     }
@@ -229,11 +230,11 @@ int BeatmapWithVisualizer::CheckInRange() {
 
     float current_time = conductor->GetSongTimePosition();
     float e = GetErrorRange();
-    Beatmap_Note next_note;
+    Beatmap_Note& next_note = notes.front();
     bool found_note = false;
 
     // Find next note (if any)
-    for (auto note : notes) {
+    for (Beatmap_Note& note : notes) {
         if (note.type.main != NOTE)
             continue;
             
@@ -244,19 +245,25 @@ int BeatmapWithVisualizer::CheckInRange() {
         }
         
     }
+
+    // No next note
     if (!found_note) {
         return HIT_BAD;
     }
 
-    // printf("current %f next %f\n", current_time, next_note.seconds );
+    // Prevent double tap
+    if (next_note.tapped) {
+        return HIT_BAD;
+    }
 
     // Check if in ranges
-
     if (abs(current_time - next_note.seconds) < e/2) {
+        next_note.tapped = true;
         return HIT_PERFECT;
     }
 
     if (abs(current_time - next_note.seconds) < e) {
+        next_note.tapped = true;
         return HIT_GOOD;
     }
 

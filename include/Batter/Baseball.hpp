@@ -1,7 +1,7 @@
 #pragma once
 #include "StreamConductor.hpp"
 #include <vector>
-#include "BeatmapNoteType.hpp"
+#include "BeatmapNote.hpp"
 #include "SceneObject.hpp"
 
 #define BB_STATE_REST 0

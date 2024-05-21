@@ -57,6 +57,7 @@ void BatterScene::Update() {
 
         else if (result == HIT_BAD){
             perfect = false;
+            score -= 1;
             PlaySound(se_bad);
             baseball.PlayBad();
         }
@@ -103,6 +104,11 @@ void BatterScene::Draw() {
         DisplayScore();
         return;
     }
+
+    char _score[16];
+    sprintf(_score, "SCORE: %d", (int)score);
+    DrawText(_score, 0, 0, 16, WHITE);
+
     // beatmap.Draw();
     batter.Draw();
     baseball.Draw();

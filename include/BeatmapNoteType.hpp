@@ -1,6 +1,0 @@
-#pragma once
-
-typedef struct {
-    int main; // Cue, note, song end...
-    int sub;  // Left button, right button, hold, release...
-} Beatmap_Note_Type;

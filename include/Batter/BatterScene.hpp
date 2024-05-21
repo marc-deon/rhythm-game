@@ -12,7 +12,7 @@ class BatterScene : public Scene {
     private:
     bool should_display_score = false;
     bool perfect = true;
-    float score;
+    float score = 0;
     const float maxScore = 56 * 2;
     const float score_threshhold_great = .90;
     const float score_threshhold_ok    = .60;
