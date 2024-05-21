@@ -3,6 +3,7 @@
 
 BatterScene::BatterScene() {
     name = "Batter";
+    metronome.SetOffset(beatmap.GetMetronomeOffset());
     conductor.Start();
 }
 
@@ -26,11 +27,13 @@ void BatterScene::Update() {
         }
         return;
     }
+    printf("conductor bpm: %f\n", conductor.GetBpm());
+    printf("conductor crotchet: %f\n", conductor.GetCrotchet());
 
     conductor.Update();
-    // metronome.Update();
+    metronome.Update();
     auto cue = beatmap.Update();
-    printf("Isplaying: %d\n", conductor.IsPlaying());
+    // printf("Isplaying: %d\n", conductor.IsPlaying());
     if (cue.main == SONG_END || !conductor.IsPlaying()) {
         should_display_score = true;
         return;

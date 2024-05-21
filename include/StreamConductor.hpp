@@ -7,26 +7,19 @@ class StreamConductor : public Conductor {
 private:
     Music stream;
     float volume = 1.0;
-    float bpm;
-    float crotchet;  // Length of quarter note
-    // float offset;    // mp3 only?
-
-    // float met_lastbeat;
-    // Sound metronome;
+    float offset;    // mp3 only?
 
 public:
     StreamConductor();
     StreamConductor(char* filename, float bpm=-1);
     ~StreamConductor();
     float GetBpm();
-    float GetChrotchet();
-    // float GetOffset();
+    float Getcrotchet();
     float GetSongTimePosition();
     float GetSongBeatPosition();
     Music GetStream();
     bool IsPlaying();
     void Update();
-    // void Metronome();
     void Start();
     void Pause();
     void Resume();
@@ -35,5 +28,4 @@ public:
     int GetInteger();
     float GetFractional();
     void SetBpm(float bpm);
-    // void SetOffset(float offset);
 };

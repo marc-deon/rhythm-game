@@ -12,7 +12,7 @@ StreamConductor::StreamConductor(char* filename, float bpm){
 
 void StreamConductor::SetBpm(float bpm) {
     this->bpm = bpm;
-    crotchet = 60 / bpm;
+    crotchet = 60.0f / bpm;
 }
 
 // void StreamConductor::SetOffset(float offset) {
@@ -29,7 +29,7 @@ float StreamConductor::GetBpm() {
     return bpm;
 }
 
-float StreamConductor::GetChrotchet() {
+float StreamConductor::Getcrotchet() {
     return crotchet;
 }
 

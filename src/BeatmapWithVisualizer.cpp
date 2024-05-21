@@ -31,7 +31,7 @@ BeatmapWithVisualizer::BeatmapWithVisualizer(StreamConductor* conductor, char* p
     char* header_element;
     
     char header_title[32];      // NOT CURRENTLY USED
-    int header_bpm;
+    float header_bpm;
     char header_composer[32];   // NOT CURRENTLY USED
     char header_vocals[32];     // NOT CURRENTLY USED
     char header_original[32];   // NOT CURRENTLY USED
@@ -43,8 +43,10 @@ BeatmapWithVisualizer::BeatmapWithVisualizer(StreamConductor* conductor, char* p
     }
 
     if (header_element = strstr(header, "bpm:")) {
-        sscanf(header_element, "bpm: %d\n", &header_bpm);
+        sscanf(header_element, "bpm: %f\n", &header_bpm);
         conductor->SetBpm(header_bpm);
+        printf("Set bpm from header to %f\n", header_bpm);
+        // exit(0);
     }
 
     if (header_element = strstr(header, "composer:")) {
@@ -222,7 +224,7 @@ void BeatmapWithVisualizer::Draw() {
 
 float BeatmapWithVisualizer::GetErrorRange() {
     // Accuracy for player is within +/- an eighth note
-    return conductor->GetChrotchet() / 2;
+    return conductor->Getcrotchet() / 2;
 }
 
 int BeatmapWithVisualizer::CheckInRange() {

@@ -17,6 +17,7 @@ public:
 
     void Update() override;
     void Draw() override;
+    void SetOffset(float offset);
 };
 
 
