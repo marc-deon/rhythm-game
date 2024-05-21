@@ -21,8 +21,8 @@ namespace SceneManager {
     Scene* CreateScene_MainMenu() {
         Scene* s = new Scene();
         s->name = "Main Menu";
-        auto b1 = new TextButton(200, 300-10, "Metrohop", cb_Metrohop);
-        auto b2 = new TextButton(600, 300-10, "Batter", cb_Batter);
+        auto b1 = new TextButton(200, 300-12, "Metrohop", cb_Metrohop);
+        auto b2 = new TextButton(600, 300-12, "Batter", cb_Batter);
         b1->right = b2;
         b2->left = b1;
         s->children.push_back(b1);

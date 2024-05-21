@@ -8,7 +8,7 @@ void TextButton::Draw() {
     int w = MeasureText(this->text.c_str(), 24);
     auto focused = FocusStack::IsFocused(this);
 
-    int rx = this->x - w - 5;
+    int rx = this->x - w/2 - 5;
     int ry = this->y - 5;
     int rw = w + 10;
     int rh = 24 + 5 + 5;
@@ -17,7 +17,7 @@ void TextButton::Draw() {
 
     DrawText (
         this->text.c_str(),
-        this->x - w,
+        this->x - w/2,
         this->y,
         24,
         focused ? WHITE : GRAY
