@@ -85,6 +85,10 @@ void Metrohop::DisplayScoreScreen() {
 void Metrohop::Update() {
 
     if (display_score_screen) {
+        // Show screen for at least a second
+        misc_timer += GetFrameTime();
+        if (misc_timer < 1)
+            return;
 
         if (IsKeyPressed(KEY_Z)) {
             SceneManager::ReplaceScene(SCENE_MAINMENU);
