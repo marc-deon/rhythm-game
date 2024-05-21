@@ -10,12 +10,12 @@
 
 class BatterScene : public Scene {
     private:
+    bool should_display_score = false;
     bool perfect = true;
-    int score;
-    int maxScore;
-    int score_great;
-    int score_ok;
-    int score_bad;
+    float score;
+    const float maxScore = 56 * 2;
+    const float score_threshhold_great = .90;
+    const float score_threshhold_ok    = .60;
 
     Sound se_bad = LoadSound("sfx/game_button.mp3");
     Sound se_good = LoadSound("sfx/good.mp3");

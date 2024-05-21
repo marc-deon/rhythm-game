@@ -133,6 +133,14 @@ BeatmapWithVisualizer::BeatmapWithVisualizer(StreamConductor* conductor, char* p
                 break;
             }
 
+            case SONG_END: {
+                float time;
+                Beatmap_Note_Type type {-1, -1};
+                sscanf(line, "%d %f", &type.main, &time);
+                notes.push_back(Beatmap_Note {(time-header_offset)/1000000, type});
+                break;
+            }
+
             default:
                 break;
         }

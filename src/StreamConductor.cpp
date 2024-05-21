@@ -3,6 +3,7 @@
 
 StreamConductor::StreamConductor(char* filename, float bpm){
     stream = LoadMusicStream(filename);
+    stream.looping = false;
     // SetMusicVolume(stream, 0);
     if (bpm != -1)
         SetBpm(bpm);

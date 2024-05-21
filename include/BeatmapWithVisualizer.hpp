@@ -14,7 +14,9 @@ enum BEATMAP_EVENT_TYPE {
     CUE_C,
     CUE_D,
     NEW_BPM,
-    NEW_TIME_SIG
+    NEW_TIME_SIG,
+    SONG_END
+
 };
 
 // TODO: Probably make a subclass of events (also make an event struct)

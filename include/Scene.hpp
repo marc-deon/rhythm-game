@@ -5,6 +5,8 @@
 #include "FocusStack.hpp"
 
 class Scene {
+    protected:
+        float misc_timer = 0;
 
     public:
         const char* name;

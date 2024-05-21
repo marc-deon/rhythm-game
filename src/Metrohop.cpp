@@ -56,7 +56,7 @@ void Metrohop::Lose() {
     display_score_screen = true;
 }
 
-void Metrohop::DisplayScoreScreen() {
+void Metrohop::DisplayScore() {
     int x, y;    // Location of various texts
     char sp[12]; // perfect string
     char sg[12]; // great string
@@ -149,7 +149,7 @@ void Metrohop::Draw(){
     ClearBackground(BLACK);
 
     if (display_score_screen) {
-        DisplayScoreScreen();
+        DisplayScore();
         return;
     }
 
