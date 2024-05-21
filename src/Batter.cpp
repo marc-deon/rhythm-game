@@ -7,6 +7,7 @@ Batter::Batter() {
 }
 
 Batter::~Batter() {
+    printf("UNLOAD BATTER\n");
     UnloadTexture(texture);
 }
 
@@ -16,8 +17,8 @@ void Batter::Anim_Reset() {
     playing = false;
 }
 
-void Batter::Update() {
-    
+int Batter::Update() {
+    return 0;
 }
 
 void Batter::Draw() {

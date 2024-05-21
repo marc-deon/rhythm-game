@@ -10,9 +10,9 @@ class Scene {
         const char* name;
         void* firstFocused; // First UI object to be focused on (if any).
         std::vector<SceneObject*> children;
-        void virtual Update();
+        int virtual Update();
         void virtual Draw();
-        ~Scene();
+        virtual ~Scene();
 };
 
 Scene* CreateScene_MainMenu();

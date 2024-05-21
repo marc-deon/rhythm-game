@@ -26,10 +26,10 @@ int main() {
 
     SceneManager::ReplaceScene(SCENE_MAINMENU);
 
-    while (!WindowShouldClose())
-    {
-        if (SceneManager::GetCurrent() == NULL)
-        {
+    while (!WindowShouldClose()) {
+        // SceneManager::ReplaceScene(SCENE_MAINMENU);
+        // SceneManager::ReplaceScene(SCENE_METROHOP);
+        if (SceneManager::GetCurrent() == NULL) {
             printf("Game exited due to no current scene\n");
             break;
         }

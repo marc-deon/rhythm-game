@@ -5,12 +5,17 @@ Scene::~Scene() {
     for (auto child : children) {
         delete child;
     }
+    children.clear();
 }
 
-void Scene::Update() {
+int Scene::Update() {
     for (auto child : children) {
-        child->Update();
+        // Return -1 when this loop is no longer valid (e.g. switching scenes)
+        auto val = child->Update();
+        if (val)
+            return val;
     }
+    return 0;
 }
 
 void Scene::Draw() {

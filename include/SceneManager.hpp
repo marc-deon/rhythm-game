@@ -8,7 +8,7 @@ enum SCENES {
 };
 
 namespace SceneManager {
-    static Scene* currentScene = NULL;
+    
 
     void ReplaceScene(SCENES scene);
     void ReplaceScene(Scene* scene);

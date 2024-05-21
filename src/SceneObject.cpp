@@ -1,18 +1,25 @@
 #include "SceneObject.hpp"
 #include "stdio.h"
 
-void SceneObject::Update() {
-    // printf("SceneObject.Update");
+int SceneObject::Update() {
     for (auto child : children) {
-        child.Update();
+        auto val = child.Update();
+        if (val)
+            return val;
     }
+    return 0;
 }
 
 
 void SceneObject::Draw() {
-    // printf("so.draw \n");
     for (auto child : children) {
         child.Draw();
     }
 }
 
+SceneObject::~SceneObject() {
+    for (auto child : children) {
+        delete &child;
+    }
+    children.clear();
+}

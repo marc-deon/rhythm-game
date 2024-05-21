@@ -8,5 +8,5 @@ class UiElement : public SceneObject {
     UiElement *left = NULL;
     UiElement *right = NULL;
 
-    void virtual Update();
+    int virtual Update();
 };

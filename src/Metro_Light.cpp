@@ -10,8 +10,6 @@ Metro_Light::Metro_Light(Conductor* c, Color active, Color inactive, float beat)
 
 
 void Metro_Light::Draw() {
-    float crotchet = conductor->GetCrotchet();
-
     int curbeat = (int) conductor->GetSongBeatPosition();
     color_current = ((curbeat % 3) + 1 == beat) ? color_active : color_inactive;
     
@@ -24,6 +22,10 @@ void Metro_Light::Draw() {
     DrawRectangle(x, y, w, h, color_current);
 }
 
-void Metro_Light::Update() {
-
+Metro_Light::~Metro_Light() {
+    printf("Metro light deconstruct\n");
 }
+
+// int Metro_Light::Update() {
+//     return 0;
+// }

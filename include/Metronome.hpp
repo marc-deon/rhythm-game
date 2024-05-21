@@ -15,7 +15,7 @@ public:
     Metronome(Conductor* conductor, int beats_per_measure=4, float offset=0);
     ~Metronome();
 
-    void Update() override;
+    int Update() override;
     void Draw() override;
 };
 

@@ -19,7 +19,10 @@ void StreamConductor::SetBpm(float bpm) {
 // }
 
 StreamConductor::StreamConductor(){ }
-StreamConductor::~StreamConductor(){ }
+StreamConductor::~StreamConductor(){
+    printf("UNLOAD MUSIC STREAM\n");
+    UnloadMusicStream(stream);
+}
 
 float StreamConductor::GetBpm() {
     return bpm;

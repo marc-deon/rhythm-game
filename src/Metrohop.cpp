@@ -13,6 +13,7 @@ Metrohop::~Metrohop() {
         delete c;
     }
     children.clear();
+    printf("metrohop deconstructed\n");
 }
 
 Metrohop::Metrohop() {
@@ -81,19 +82,21 @@ void Metrohop::DisplayScoreScreen() {
 
 }
 
-void Metrohop::Update() {
+int Metrohop::Update() {
 
     if (display_score_screen) {
 
         if (IsKeyPressed(KEY_Z)) {
             SceneManager::ReplaceScene(SCENE_MAINMENU);
+            return -1;
         }
         
-        return;
+        return 0;
     }
 
     if (IsKeyPressed(KEY_END)) {
         SceneManager::ReplaceScene(SCENE_MAINMENU);
+        return -1;
     }
 
     conductor.Update();
@@ -135,7 +138,7 @@ void Metrohop::Update() {
     }
 
     // Update children
-    Scene::Update();
+    return Scene::Update();
 }
 
 void Metrohop::Draw(){

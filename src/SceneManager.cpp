@@ -2,16 +2,20 @@
 #include "Metrohop.hpp"
 #include "BatterScene.hpp"
 
+
 namespace SceneManager {
-    
+    static Scene* currentScene = NULL;
+
     // Main menu button callback
-    void cb_Metrohop() {
+    int cb_Metrohop() {
         SceneManager::ReplaceScene(SCENE_METROHOP);
+        return -1;
     }
 
     // Main menu button callback
-    void cb_Batter() {
+    int cb_Batter() {
         SceneManager::ReplaceScene(SCENE_BATTER);
+        return -1;
     }
 
     Scene* CreateScene_MainMenu() {
@@ -49,9 +53,12 @@ namespace SceneManager {
     // Replace current scene by pointer to already-constructed scene
     void ReplaceScene(Scene* scene) {
         if(currentScene) {
-            free(currentScene);
+            printf("deleting current scene %s\n", currentScene->name);
+            delete currentScene;
+            currentScene = NULL;
         }
         currentScene = scene;
+        // We don't need to deallocate anything in the FS; that's handled above
         FocusStack::Clear();
         FocusStack::Push(currentScene->firstFocused);
     }

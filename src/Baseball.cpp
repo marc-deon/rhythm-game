@@ -7,6 +7,7 @@ Baseball::Baseball() {
 }
 
 Baseball::~Baseball() {
+    printf("UNLOAD BASEBALL\n");
     UnloadTexture(texture);
 }
 
@@ -28,7 +29,6 @@ void Baseball::Update(Beatmap_Note_Type cue) {
         state = BB_STATE_LONG_LAUNCH;
         elapsed_time = 0;
     }
-    
 }
 
 float normalize(float a, float b, float x) {

@@ -6,9 +6,14 @@ BatterScene::BatterScene() {
     conductor.Start();
 }
 
-void BatterScene::Exit() { } 
+BatterScene::~BatterScene() {
+    printf("UNLOADED BATTERSCENE 3 SFX\n");
+    UnloadSound(se_bad);
+    UnloadSound(se_good);
+    UnloadSound(se_perfect);
+}
 
-void BatterScene::Update() {
+int BatterScene::Update() {
     conductor.Update();
     metronome.Update();
     auto cue = beatmap.Update();
@@ -36,8 +41,9 @@ void BatterScene::Update() {
 
     if (IsKeyPressed(KEY_END)) {
         SceneManager::ReplaceScene(SCENE_MAINMENU);
-        return;
+        return -1;
     }
+    return 0;
 }
 
 void BatterScene::Draw() {

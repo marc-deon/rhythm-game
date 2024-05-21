@@ -5,15 +5,19 @@ CrosshairMetronome::CrosshairMetronome() {
 }
 
 CrosshairMetronome::~CrosshairMetronome() {
+    printf("UNLOAD CROSSHAIR 3\n");
+    // UnloadSound(se_bad);
+    // UnloadSound(se_good);
+    // UnloadSound(se_perfect);
 }
 
 CrosshairMetronome::CrosshairMetronome(StreamConductor* c, float offset) {
     lastbeat = offset;
     this->offset = offset;
     conductor = c;
-    se_bad = LoadSound("sfx/game_button.mp3");
-    se_good = LoadSound("sfx/good.mp3");
-    se_perfect = LoadSound("sfx/perfect.mp3");
+    // se_bad = LoadSound("sfx/game_button.mp3");
+    // se_good = LoadSound("sfx/good.mp3");
+    // se_perfect = LoadSound("sfx/perfect.mp3");
 
     rect.width = 40;
     rect.height = 80;
@@ -99,13 +103,13 @@ int CrosshairMetronome::CheckInRange() {
 }
 
 void CrosshairMetronome::PlayPerfect() {
-    PlaySound(se_perfect);
+    // PlaySound(se_perfect);
 }
 
 void CrosshairMetronome::PlayGood() {
-    PlaySound(se_good);
+    // PlaySound(se_good);
 }
 
 void CrosshairMetronome::PlayBad() {
-    PlaySound(se_bad);
+    // PlaySound(se_bad);
 }

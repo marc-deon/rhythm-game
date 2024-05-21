@@ -7,7 +7,7 @@
 class Button : public UiElement {
     public:
 
-    void (*cb_onPress)();
+    int (*cb_onPress)();
 
 };
 
@@ -16,7 +16,7 @@ class TextButton : public Button {
     std::string text;
     
     void Draw() override;
-    void Update() override;
+    int Update() override;
     TextButton(int x, int y, std::string text);
-    TextButton(int x, int y, std::string text, void (*onPress)());
+    TextButton(int x, int y, std::string text, int (*onPress)());
 };

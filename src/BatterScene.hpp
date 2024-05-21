@@ -27,12 +27,12 @@ class BatterScene : public Scene {
     Batter batter;
     Baseball baseball;
     
-    // void DisplayScore(); // After player loses, swap to a subscene that just shows score
-    void Exit(); // Aftter viewing score, tear down and go back to main menu
+    void DisplayScore(); // After player loses, swap to a subscene that just shows score
 
     public:
-    void Update() override;
+    int Update() override;
     void Draw() override;
     BatterScene();
+    ~BatterScene();
 
 };

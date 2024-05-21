@@ -1,6 +1,10 @@
 #include "Metronome.hpp"
+#include "stdio.h"
 
-Metronome::~Metronome() { }
+Metronome::~Metronome() {
+    printf("UNLOAD METRONOME 1\n");
+    UnloadSound(sound);    
+}
 
 Metronome::Metronome(Conductor* c, int beats_per_measure, float offset) {
     this->offset = offset;
@@ -11,7 +15,7 @@ Metronome::Metronome(Conductor* c, int beats_per_measure, float offset) {
     sound = LoadSound("sfx/metronome.wav");
 }
 
-void Metronome::Update(){
+int Metronome::Update(){
     float crotchet = conductor->GetCrotchet();
     if (conductor->GetSongTimePosition() > lastbeat + crotchet) {
         if ((int)conductor->GetSongBeatPosition() % beats_per_measure == 0) {
@@ -24,6 +28,7 @@ void Metronome::Update(){
         }
         lastbeat += crotchet;
     }
+    return 0;
 }
 
 void Metronome::Draw() {}
