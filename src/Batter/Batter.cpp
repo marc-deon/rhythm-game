@@ -35,11 +35,11 @@ void Batter::Draw() {
     if (!playing)
         return;
 
-    wait++;
+    wait += 60.0 / GetFPS();
 
-    if(wait == frames_to_wait) {
+    if(((int)wait) >= frames_to_wait) {
         frame++;
-        wait = 0;
+        wait -= frames_to_wait;
         if (frame == frame_count)
             Anim_Reset();
     }
