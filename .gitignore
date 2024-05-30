@@ -1,2 +1,6 @@
 /.vscode/
 rhythm
+rhythm.data
+rhythm.html
+rhythm.js
+rhythm.wasm
