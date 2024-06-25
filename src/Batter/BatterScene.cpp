@@ -108,7 +108,7 @@ void BatterScene::Draw() {
 
     char _score[16];
     sprintf(_score, "SCORE: %d", (int)score);
-    DrawText(_score, 0, 0, 16, WHITE);
+    DrawText(_score, 800/2 - 32, 0, 16, WHITE);
 
     // beatmap.Draw();
     batter.Draw();

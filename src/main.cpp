@@ -32,7 +32,7 @@ void leaktest() {
 int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "maqo's rhythm game");
     InitAudio();
-    SetTargetFPS(100);
+    SetTargetFPS(60);
 
     #ifdef LEAKTEST
     leaktest();
@@ -50,6 +50,7 @@ int main() {
         }
         SceneManager::GetCurrent()->Update();
         BeginDrawing();
+        DrawFPS(0, 0);
         SceneManager::GetCurrent()->Draw();
         EndDrawing();
     }
