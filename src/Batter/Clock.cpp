@@ -53,7 +53,8 @@ void Clock::Draw() {
 
     if(((int)wait) >= frames_to_wait) {
         // Swinging right is the first half of the spritesheet, and swinging left is the second half
-        int final_frame = swingDirection == SWING_LEFT ? 9 : 4;
+        int final_frame = swingDirection == SWING_LEFT ? frame_count*2-1 : frame_count-1;
+
 
         if (frame == final_frame) {
             playing = false;
@@ -61,18 +62,23 @@ void Clock::Draw() {
         }
         else {
             frame++;
+            // Apex frames; slow animation
+            if (frame == 2 || frame == 7)
+                frames_to_wait = 4;
             wait -= frames_to_wait;
         }
     }
 }
 
 void Clock::SwingLeft() {
-    frame = 5;
+    frames_to_wait = 2;
+    frame = frame_count;
     playing = true;
     swingDirection = SWING_LEFT;
 }
 
 void Clock::SwingRight() {
+    frames_to_wait = 2;
     frame = 0;
     playing = true;
     swingDirection = SWING_RIGHT;
