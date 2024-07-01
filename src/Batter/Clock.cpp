@@ -35,8 +35,8 @@ void Clock::Draw() {
     Rectangle source = size;
     source.x = size.width * frame;
     // Draw the clock a bit to the right of the batter
-    float x = GetScreenWidth() / 2 + source.width * 2;
-    float y = (GetScreenHeight() / 2) - (scale * size.height / 2);
+    float x = GetScreenWidth() / 2 + source.width * 2 - 40;
+    float y = (GetScreenHeight() / 2) - (scale * size.height / 2) + 85;
 
     DrawTexturePro(texture,
         source,

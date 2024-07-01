@@ -1,10 +1,13 @@
 #include "Batter/BatterScene.hpp"
 #include "SceneManager.hpp"
+#include "DrawTextureTiled.hpp"
 
 BatterScene::BatterScene() {
     name = "Batter";
-    metronome.SetOffset(beatmap.GetMetronomeOffset());
-    clock.SetOffset(beatmap.GetMetronomeOffset());
+    float beatmap_offset = beatmap.GetMetronomeOffset();
+    metronome.SetOffset(beatmap_offset);
+    clock.SetOffset(beatmap_offset);
+    starBeat = beatmap_offset;
     conductor.Start();
 }
 
@@ -12,6 +15,8 @@ BatterScene::~BatterScene() {
     UnloadSound(se_bad);
     UnloadSound(se_good);
     UnloadSound(se_perfect);
+    UnloadTexture(stars);
+    UnloadTexture(house);
 }
 
 void BatterScene::Update() {
@@ -99,8 +104,43 @@ void BatterScene::DisplayScore() {
     DrawText(" TO CONTINUE", x, y, 16, WHITE);
 }
 
+void BatterScene::ScrollStars() {
+    int SCALE = 2;
+
+    // if (conductor.GetSongTimePosition() > starBeat) {
+    //     starBeat += conductor.GetCrotchet();
+    //     star_scroll_offset.x += 5;
+    //     star_scroll_offset.y -= 5;
+    // }
+
+    star_scroll_offset.x--;
+    if (star_scroll_offset.x <= -stars.width * SCALE)
+        star_scroll_offset.x = 0;
+
+    star_scroll_offset.y--;
+    if (star_scroll_offset.y <= -stars.height * SCALE)
+        star_scroll_offset.y = 0;
+
+    /* Draw star background and loop */
+    Rectangle dest = {0,0, 800, 600};
+    DrawTextureTiled(stars, dest, star_scroll_offset, SCALE);
+}
+
 void BatterScene::Draw() {
-    ClearBackground(BLACK);
+    ClearBackground({0x0, 0x0, 0x73, 0xff});
+
+    // Scroll stars infinitely
+    ScrollStars();
+
+    // Draw House background
+    DrawTexturePro(house,
+        {0, 0, 400, 300}, // Source
+        {0, 0, 800, 600}, // Dest
+        {0, 0},           // Origin
+        0,                // Rotation
+        WHITE
+    );
+
     inputdisplay.Draw();
     
     if (should_display_score) {
@@ -110,7 +150,7 @@ void BatterScene::Draw() {
 
     char _score[16];
     sprintf(_score, "SCORE: %d", (int)score);
-    DrawText(_score, 800/2 - 32, 0, 16, WHITE);
+    DrawText(_score, 800/2 - 32, 16, 16, WHITE);
 
     // beatmap.Draw();
     clock.Draw();

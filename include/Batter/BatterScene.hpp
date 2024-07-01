@@ -18,6 +18,7 @@ class BatterScene : public Scene {
     const float maxScore = 56 * 2;
     const float score_threshhold_great = .90;
     const float score_threshhold_ok    = .60;
+    Vector2 star_scroll_offset = {0,0};
 
     Sound se_bad = LoadSound("sfx/game_button.mp3");
     Sound se_good = LoadSound("sfx/good.mp3");
@@ -26,11 +27,15 @@ class BatterScene : public Scene {
     StreamConductor conductor = StreamConductor("music/airbatter.ogg");
     BeatmapWithVisualizer beatmap = BeatmapWithVisualizer(&conductor, "beatmaps/airbatter-shortlong-quantized.bm");
     Metronome metronome = Metronome(&conductor);
+    Texture stars = LoadTexture("graphics/baseball/stars.png");
+    Texture house = LoadTexture("graphics/baseball/house.png");
     Batter batter;
     Clock clock = Clock(&conductor);
     Baseball baseball;
     InputDisplay inputdisplay;
 
+    float starBeat = 0;
+    void ScrollStars();
     void DisplayScore(); // After player loses, swap to a subscene that just shows score
 
     public:

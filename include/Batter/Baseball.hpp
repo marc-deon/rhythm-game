@@ -35,12 +35,12 @@ private:
     path short_launch = { {
         path_node {0,                  Vector2 {285, 404} },
         path_node {0.2857142857142857, Vector2 {370, 197} },
-        path_node {0.5714285714285714, Vector2 {402, 285} },
+        path_node {0.5714285714285714, Vector2 {402, 285+125} },
     } };
     path long_launch = {{
         path_node {0,                  Vector2 {285, 404} },
         path_node {0.5714285714285714, Vector2 {370, 16} },
-        path_node {1.1428571428571428, Vector2 {402, 285} },
+        path_node {1.1428571428571428, Vector2 {402, 285+125} },
     } };
     // Path perfect;
     // Path good;

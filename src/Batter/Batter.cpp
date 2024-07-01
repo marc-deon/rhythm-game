@@ -1,6 +1,6 @@
 #include "Batter/Batter.hpp"
-#include "stdio.h"
-
+#include <stdio.h>
+#include "DrawTextureTiled.hpp"
 
 Batter::Batter() {
     texture = LoadTexture("graphics/baseball/batter.png");
@@ -22,7 +22,7 @@ void Batter::Draw() {
     Rectangle source = size;
     source.x = size.width * frame;
     float x = GetScreenWidth() / 2;
-    float y = (GetScreenHeight() / 2) - (scale * size.height / 2);
+    float y = (GetScreenHeight() / 2) - (scale * size.height / 2) + 125;
 
     DrawTexturePro(texture,
         source,
