@@ -28,7 +28,7 @@ float StreamConductor::GetBpm() {
     return bpm;
 }
 
-float StreamConductor::Getcrotchet() {
+float StreamConductor::GetCrotchet() {
     return crotchet;
 }
 

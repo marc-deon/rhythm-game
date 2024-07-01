@@ -14,7 +14,7 @@ public:
     StreamConductor(char* filename, float bpm=-1);
     ~StreamConductor();
     float GetBpm();
-    float Getcrotchet();
+    float GetCrotchet();
     float GetSongTimePosition();
     float GetSongBeatPosition();
     Music GetStream();

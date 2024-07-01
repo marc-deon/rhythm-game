@@ -4,6 +4,7 @@
 BatterScene::BatterScene() {
     name = "Batter";
     metronome.SetOffset(beatmap.GetMetronomeOffset());
+    clock.SetOffset(beatmap.GetMetronomeOffset());
     conductor.Start();
 }
 
@@ -36,6 +37,7 @@ void BatterScene::Update() {
         return;
     }
 
+    clock.Update();
     batter.Update();
     baseball.Update(cue);
     if (IsKeyPressed(KEY_Z)) {
@@ -111,6 +113,7 @@ void BatterScene::Draw() {
     DrawText(_score, 800/2 - 32, 0, 16, WHITE);
 
     // beatmap.Draw();
+    clock.Draw();
     batter.Draw();
     baseball.Draw();
 }

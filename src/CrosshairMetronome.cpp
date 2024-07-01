@@ -62,7 +62,7 @@ void CrosshairMetronome::Draw() {
 
 float CrosshairMetronome::GetErrorRange() {
     // Accuracy for player is within +/- an eighth note
-    return conductor->Getcrotchet() / 2;
+    return conductor->GetCrotchet() / 2;
 }
 
 

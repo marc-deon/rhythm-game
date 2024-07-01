@@ -8,6 +8,7 @@
 #include "Batter.hpp"
 #include "Metronome.hpp"
 #include "InputDisplay.hpp"
+#include "Clock.hpp"
 
 class BatterScene : public Scene {
     private:
@@ -26,6 +27,7 @@ class BatterScene : public Scene {
     BeatmapWithVisualizer beatmap = BeatmapWithVisualizer(&conductor, "beatmaps/airbatter-shortlong-quantized.bm");
     Metronome metronome = Metronome(&conductor);
     Batter batter;
+    Clock clock = Clock(&conductor);
     Baseball baseball;
     InputDisplay inputdisplay;
 
