@@ -126,6 +126,9 @@ void Baseball::Draw() {
         break;
     }
 
+    if (state == BB_STATE_REST)
+        return;
+
     Vector2 pos = FindPosition();
     float SCALE = 2;
 
