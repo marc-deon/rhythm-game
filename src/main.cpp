@@ -1,17 +1,11 @@
 #include <stdio.h>
 #include <raylib.h>
-#include "StreamConductor.hpp"
-#include "Metronome.hpp"
-#include "CrosshairMetronome.hpp"
-#include "BeatmapWithVisualizer.hpp"
-#include "Batter/Batter.hpp"
-#include "Batter/Baseball.hpp"
-#include "Scene.hpp"
+#include "raymath.h"
 #include "SceneManager.hpp"
-#include <stdlib.h>
+#include "ScaleWindow.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define VIRT_SCREEN_W 800
+#define VIRT_SCREEN_H 600
 
 void InitAudio() {
     InitAudioDevice();
@@ -26,11 +20,17 @@ void leaktest() {
         i++;
         i %= SCENE_MAX_COUNT;
     }
-
 }
 
 int main() {
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "maqo's rhythm game");
+    
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+    InitWindow(VIRT_SCREEN_W, VIRT_SCREEN_H, "maqo's rhythm game");
+    SetWindowMinSize(320, 240);
+
+    RenderTexture2D target = LoadRenderTexture(VIRT_SCREEN_W, VIRT_SCREEN_H);
+    SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
+
     InitAudio();
     SetTargetFPS(60);
 
@@ -42,17 +42,26 @@ int main() {
     SceneManager::ReplaceScene(SCENE_MAINMENU);
 
     while (!WindowShouldClose()) {
+        float scale = FindWindowScale();
+        Vector2 virtualMouse = ScaleMouse(scale);
+
         SceneManager::CheckToReplace();
-        
+
         if (SceneManager::GetCurrent() == NULL) {
             printf("Game exited due to no current scene\n");
             break;
         }
+
         SceneManager::GetCurrent()->Update();
-        BeginDrawing();
+
+        // Draw game to virtual screen texture
+        BeginTextureMode(target);
         DrawFPS(0, 0);
         SceneManager::GetCurrent()->Draw();
-        EndDrawing();
+        EndTextureMode();
+
+        // Draw virtual screen to real screen
+        DrawScaled(target, scale);
     }
     CloseWindow();
 }

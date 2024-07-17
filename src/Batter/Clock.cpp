@@ -1,6 +1,9 @@
 #include "Batter/Clock.hpp"
 #include "stdio.h"
 
+#define VIRT_SCREEN_W 800
+#define VIRT_SCREEN_H 600
+
 Clock::Clock(Conductor* c, float offset) {
     texture = LoadTexture("graphics/baseball/clock.png");
 
@@ -35,8 +38,8 @@ void Clock::Draw() {
     Rectangle source = size;
     source.x = size.width * frame;
     // Draw the clock a bit to the right of the batter
-    float x = GetScreenWidth() / 2 + source.width * 2 - 40;
-    float y = (GetScreenHeight() / 2) - (scale * size.height / 2) + 85;
+    float x = VIRT_SCREEN_W / 2 + source.width * 2 - 40;
+    float y = (VIRT_SCREEN_H / 2) - (scale * size.height / 2) + 85;
 
     DrawTexturePro(texture,
         source,

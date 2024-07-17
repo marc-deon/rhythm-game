@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "DrawTextureTiled.hpp"
 
+#define VIRT_SCREEN_W 800
+#define VIRT_SCREEN_H 600
+
 Batter::Batter() {
     texture = LoadTexture("graphics/baseball/batter.png");
 }
@@ -21,8 +24,8 @@ void Batter::Draw() {
 
     Rectangle source = size;
     source.x = size.width * frame;
-    float x = GetScreenWidth() / 2;
-    float y = (GetScreenHeight() / 2) - (scale * size.height / 2) + 125;
+    float x = VIRT_SCREEN_W / 2;
+    float y = (VIRT_SCREEN_H / 2) - (scale * size.height / 2) + 125;
 
     DrawTexturePro(texture,
         source,
