@@ -10,7 +10,7 @@ offset = .554
 bpm = 124.0
 beatmap.write(f"""`
 title: Fly Me To The Star
-bpm: 124
+bpm: {bpm}
 composer:
 vocals:
 original:
