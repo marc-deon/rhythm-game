@@ -45,7 +45,7 @@ void BatterScene::Update() {
     clock.Update();
     batter.Update();
     baseball.Update(cue);
-    if (IsKeyPressed(KEY_Z)) {
+    if (IsKeyPressed(KEY_Z) || IsKeyPressed(KEY_X)) {
         batter.Swing();
 
         int result = beatmap.CheckInRange(0);
@@ -68,6 +68,11 @@ void BatterScene::Update() {
             PlaySound(se_bad);
             baseball.PlayBad();
         }
+    }
+
+    if (beatmap.CheckForMiss()) {
+        score -= 1;
+        PlaySound(se_bad);
     }
 
     if (IsKeyPressed(KEY_END)) {

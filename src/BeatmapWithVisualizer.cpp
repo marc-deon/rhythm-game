@@ -239,12 +239,10 @@ float BeatmapWithVisualizer::GetErrorRange() {
     return conductor->GetCrotchet() / 4;
 }
 
-int BeatmapWithVisualizer::CheckInRange(int subtype) {
-
+// Returns true if miss detected
+bool BeatmapWithVisualizer::CheckForMiss() {
     float current_time = conductor->GetSongTimePosition();
     float e = GetErrorRange();
-    Beatmap_Note& next_note = notes.front();
-    bool found_note = false;
 
     // Find next note (if any)
     for (Beatmap_Note& note : notes) {
@@ -252,40 +250,73 @@ int BeatmapWithVisualizer::CheckInRange(int subtype) {
         // If this is some sort of BG event trigger, skip
         if (note.type.main != NOTE)
             continue;
+        
+        // See if we HAVEN'T tapped it and it's past
+        if (note.seconds < current_time - e) {
+            if (!note.tapped) {
+                note.tapped = true;
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
+    }
 
+    // No misses
+    return false;
+}
+
+int BeatmapWithVisualizer::CheckInRange(int subtype) {
+
+    float current_time = conductor->GetSongTimePosition();
+    float e = GetErrorRange();
+    Beatmap_Note* next_note = 0;
+
+    // Find next note (if any)
+    for (Beatmap_Note& note : notes) {
+
+        // If this is some sort of BG event trigger, skip
+        if (note.type.main != NOTE)
+            continue;
+            
         // If e.g. we're looking for a left button but this note is for right button, skip
         if (note.type.sub != subtype)
             continue;
-        
+
+
         // Allow for late hits
-        if (note.seconds > current_time - e) {
-            next_note = note;
-            found_note = true;
+        if ((current_time - e <= note.seconds) && (note.seconds <= current_time + e)) {
+            // Prevent double tap (will default to "no next note")
+            if (note.tapped) 
+                continue;
+
+            next_note = &note;
             break;
         }
-        
+
+        // Too early to hit this note
+        if (note.seconds > current_time + e) {
+            break;
+        }
     }
 
     // No next note
-    if (!found_note) {
+    if (next_note == 0) {
         return HIT_BAD;
     }
 
-    // Prevent double tap
-    if (next_note.tapped) {
-        return HIT_BAD;
-    }
+    next_note->tapped = true;
+
 
     // Check if in ranges
-    if (abs(current_time - next_note.seconds) < e/2) {
-        next_note.tapped = true;
+    if (abs(current_time - next_note->seconds) < e/2) {
         return HIT_PERFECT;
     }
 
-    if (abs(current_time - next_note.seconds) < e) {
-        next_note.tapped = true;
+    if (abs(current_time - next_note->seconds) < e) {
         return HIT_GOOD;
     }
-
+    
     return HIT_BAD;
 }

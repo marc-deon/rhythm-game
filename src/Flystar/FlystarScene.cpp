@@ -3,17 +3,12 @@
 
 FlystarScene::FlystarScene() {
     name = "Flystar";
-    printf("Set name\n");
     float beatmap_offset = beatmap.GetMetronomeOffset();
-    printf("Got beatmap offset\n");
     metronome.SetOffset(beatmap_offset);
-    printf("Set metronome offset\n");
     conductor.Start();
-    printf("Started conductor\n");
 }
 
 FlystarScene::~FlystarScene() {
-    printf("Destroy\n");
     UnloadSound(se_bad);
     UnloadSound(se_good);
     UnloadSound(se_perfect);
@@ -43,7 +38,6 @@ if (IsKeyPressed(key)) {
 }
 
 void FlystarScene::Update() {
-    printf("Update\n");
     if (should_display_score) {
         // Show screen for at least a second
         misc_timer += GetFrameTime();
@@ -68,7 +62,12 @@ void FlystarScene::Update() {
 
     CheckAndScore(KEY_Z, junna);
     CheckAndScore(KEY_X, nana);
-
+    
+    bool result = beatmap.CheckForMiss();
+    if (result) {
+        score -= 1;
+        PlaySound(se_bad);
+    }
 
     if (IsKeyPressed(KEY_END)) {
         SceneManager::ReplaceScene(SCENE_MAINMENU);
