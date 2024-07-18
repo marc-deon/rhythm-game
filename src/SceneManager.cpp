@@ -1,6 +1,7 @@
 #include "SceneManager.hpp"
 #include "Metrohop/Metrohop.hpp"
 #include "Batter/BatterScene.hpp"
+#include "Flystar/FlystarScene.hpp"
 #include "InputDisplay.hpp"
 
 namespace SceneManager {
@@ -15,18 +16,25 @@ namespace SceneManager {
     // Main menu button callback
     void cb_Batter() {
         SceneManager::ReplaceScene(SCENE_BATTER);
-        
+    }
+
+    void cb_Flystar() {
+        SceneManager::ReplaceScene(SCENE_FLYSTAR);
     }
 
     Scene* CreateScene_MainMenu() {
         Scene* s = new Scene();
         s->name = "Main Menu";
         auto b1 = new TextButton(200, 300-12, "Metrohop", cb_Metrohop);
-        auto b2 = new TextButton(600, 300-12, "Batter", cb_Batter);
+        auto b2 = new TextButton(400, 300-12, "Batter", cb_Batter);
+        auto b3 = new TextButton(600, 300-12, "Flystar", cb_Flystar);
         b1->right = b2;
         b2->left = b1;
+        b2->right = b3;
+        b3->left = b2;
         s->children.push_back(b1);
         s->children.push_back(b2);
+        s->children.push_back(b3);
         s->firstFocused = b1;
         s->children.push_back(new InputDisplay());
         return s;
@@ -62,6 +70,9 @@ namespace SceneManager {
                 break;
             case SCENE_BATTER:
                 nextScene = new BatterScene();
+                break;
+            case SCENE_FLYSTAR:
+                nextScene = new FlystarScene();
                 break;
             default:
                 exit(1);

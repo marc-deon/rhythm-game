@@ -23,7 +23,7 @@ void leaktest() {
 }
 
 int main() {
-    
+    SetTraceLogLevel(LOG_DEBUG);
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     InitWindow(VIRT_SCREEN_W, VIRT_SCREEN_H, "maqo's rhythm game");
     SetWindowMinSize(320, 240);
@@ -52,11 +52,13 @@ int main() {
             break;
         }
 
+        FocusStack::Update();
+
         SceneManager::GetCurrent()->Update();
 
         // Draw game to virtual screen texture
         BeginTextureMode(target);
-        DrawFPS(0, 0);
+        // DrawFPS(0, 0);
         SceneManager::GetCurrent()->Draw();
         EndTextureMode();
 

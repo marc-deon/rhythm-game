@@ -45,6 +45,6 @@ public:
     Beatmap_Note_Type Update(); // Return any cues (i.e. launch ball)
     void Draw();
     float GetErrorRange();
-    int CheckInRange();
+    int CheckInRange(int subtype);
     float GetMetronomeOffset();
 };

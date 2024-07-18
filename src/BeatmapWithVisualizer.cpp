@@ -214,19 +214,32 @@ void BeatmapWithVisualizer::Draw() {
             }
         }
 
+        int offset = 0;
+
+        if (note.type.sub == 36) {
+            offset = 0;
+            c = {0x95, 0xCA, 0xED, 0xff};
+            
+        }
+        else if (note.type.sub == 39) {
+            offset = 80;
+            c = {0xFD, 0xD1, 0x62, 0xff};
+        }
+        
+
         DrawRectangle(
-            GetScreenWidth() * (note.seconds - current_time) / TIME_RANGE,
-            0, 40, 80, c
+            800 * (note.seconds - current_time) / TIME_RANGE,
+            offset, 40, 80, c
         );
     }
 }
 
 float BeatmapWithVisualizer::GetErrorRange() {
-    // Accuracy for player is within +/- an eighth note
-    return conductor->GetCrotchet() / 2;
+    // Accuracy for player is within +/- 16th note
+    return conductor->GetCrotchet() / 4;
 }
 
-int BeatmapWithVisualizer::CheckInRange() {
+int BeatmapWithVisualizer::CheckInRange(int subtype) {
 
     float current_time = conductor->GetSongTimePosition();
     float e = GetErrorRange();
@@ -235,9 +248,16 @@ int BeatmapWithVisualizer::CheckInRange() {
 
     // Find next note (if any)
     for (Beatmap_Note& note : notes) {
+
+        // If this is some sort of BG event trigger, skip
         if (note.type.main != NOTE)
             continue;
-            
+
+        // If e.g. we're looking for a left button but this note is for right button, skip
+        if (note.type.sub != subtype)
+            continue;
+        
+        // Allow for late hits
         if (note.seconds > current_time - e) {
             next_note = note;
             found_note = true;

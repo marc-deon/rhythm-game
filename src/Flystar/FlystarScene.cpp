@@ -1,25 +1,49 @@
-#include "Batter/BatterScene.hpp"
+#include "Flystar/FlystarScene.hpp"
 #include "SceneManager.hpp"
-#include "DrawTextureTiled.hpp"
 
-BatterScene::BatterScene() {
-    name = "Batter";
+FlystarScene::FlystarScene() {
+    name = "Flystar";
+    printf("Set name\n");
     float beatmap_offset = beatmap.GetMetronomeOffset();
+    printf("Got beatmap offset\n");
     metronome.SetOffset(beatmap_offset);
-    clock.SetOffset(beatmap_offset);
-    starBeat = beatmap_offset;
+    printf("Set metronome offset\n");
     conductor.Start();
+    printf("Started conductor\n");
 }
 
-BatterScene::~BatterScene() {
+FlystarScene::~FlystarScene() {
+    printf("Destroy\n");
     UnloadSound(se_bad);
     UnloadSound(se_good);
     UnloadSound(se_perfect);
-    UnloadTexture(stars);
-    UnloadTexture(house);
 }
 
-void BatterScene::Update() {
+void FlystarScene::CheckAndScore(KeyboardKey key, int subtype) {
+if (IsKeyPressed(key)) {
+
+        int result = beatmap.CheckInRange(subtype);
+        if (result == HIT_PERFECT) {
+            score += 2;
+            PlaySound(se_perfect);
+        }
+
+        else if (result == HIT_GOOD) {
+            perfect = false;
+            score += 1;
+            PlaySound(se_good);
+        }
+
+        else if (result == HIT_BAD){
+            perfect = false;
+            score -= 1;
+            PlaySound(se_bad);
+        }
+    }
+}
+
+void FlystarScene::Update() {
+    printf("Update\n");
     if (should_display_score) {
         // Show screen for at least a second
         misc_timer += GetFrameTime();
@@ -42,33 +66,9 @@ void BatterScene::Update() {
         return;
     }
 
-    clock.Update();
-    batter.Update();
-    baseball.Update(cue);
-    if (IsKeyPressed(KEY_Z)) {
-        batter.Swing();
+    CheckAndScore(KEY_Z, junna);
+    CheckAndScore(KEY_X, nana);
 
-        int result = beatmap.CheckInRange(0);
-        if (result == HIT_PERFECT) {
-            score += 2;
-            PlaySound(se_perfect);
-            baseball.PlayPerfect();
-        }
-
-        else if (result == HIT_GOOD) {
-            perfect = false;
-            score += 1;
-            PlaySound(se_good);
-            baseball.PlayGood();
-        }
-
-        else if (result == HIT_BAD){
-            perfect = false;
-            score -= 1;
-            PlaySound(se_bad);
-            baseball.PlayBad();
-        }
-    }
 
     if (IsKeyPressed(KEY_END)) {
         SceneManager::ReplaceScene(SCENE_MAINMENU);
@@ -76,7 +76,7 @@ void BatterScene::Update() {
     }
 }
 
-void BatterScene::DisplayScore() {
+void FlystarScene::DisplayScore() {
     int x, y;    // Location of various texts
     char rating[16]; // perfect string SUPERB!
     if (score / maxScore > score_threshhold_great)
@@ -104,44 +104,11 @@ void BatterScene::DisplayScore() {
     DrawText(" TO CONTINUE", x, y, 16, WHITE);
 }
 
-void BatterScene::ScrollStars() {
-    int SCALE = 2;
-
-    // if (conductor.GetSongTimePosition() > starBeat) {
-    //     starBeat += conductor.GetCrotchet();
-    //     star_scroll_offset.x += 5;
-    //     star_scroll_offset.y -= 5;
-    // }
-
-    star_scroll_offset.x--;
-    if (star_scroll_offset.x <= -stars.width * SCALE)
-        star_scroll_offset.x = 0;
-
-    star_scroll_offset.y--;
-    if (star_scroll_offset.y <= -stars.height * SCALE)
-        star_scroll_offset.y = 0;
-
-    /* Draw star background and loop */
-    Rectangle dest = {0,0, 800, 600};
-    DrawTextureTiled(stars, dest, star_scroll_offset, SCALE);
-}
-
-void BatterScene::Draw() {
-    ClearBackground({0x0, 0x0, 0x73, 0xff});
-
-    // Scroll stars infinitely
-    ScrollStars();
-
-    // Draw House background
-    DrawTexturePro(house,
-        {0, 0, 400, 300}, // Source
-        {0, 0, 800, 600}, // Dest
-        {0, 0},           // Origin
-        0,                // Rotation
-        WHITE
-    );
+void FlystarScene::Draw() {
+    ClearBackground(BLACK);
 
     inputdisplay.Draw();
+    beatmap.Draw();
     
     if (should_display_score) {
         DisplayScore();
@@ -152,10 +119,7 @@ void BatterScene::Draw() {
     sprintf(_score, "SCORE: %d", (int)score);
     DrawText(_score, 800/2 - 32, 16, 16, WHITE);
 
-    beatmap.Draw();
-    clock.Draw();
-    batter.Draw();
-    baseball.Draw();
+
 }
 
 

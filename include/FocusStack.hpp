@@ -4,8 +4,10 @@
 namespace FocusStack {
 //private:
     static std::vector<void*> focusStack;
+    static void* next = 0;
 
 //public:
+    void Update();
     void Push(void* p);
     void Pop(void* p);
     void PopUntil(void* p);

@@ -1,6 +1,16 @@
 #include "FocusStack.hpp"
 
 namespace FocusStack {
+    
+
+    void Update() {
+        if (next) {
+            focusStack.pop_back();
+            focusStack.push_back(next);
+            next = 0;
+        }
+    }
+
     void Push(void* p) {
         focusStack.push_back(p);
     }
@@ -26,8 +36,9 @@ namespace FocusStack {
     }
 
     void ChangeTo(void* p) {
-        focusStack.pop_back();
-        focusStack.push_back(p);
+        next = p;
+        // focusStack.pop_back();
+        // focusStack.push_back(p);
     }
 
     void Clear() {

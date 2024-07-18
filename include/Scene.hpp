@@ -16,5 +16,3 @@ class Scene {
         void virtual Draw();
         virtual ~Scene();
 };
-
-Scene* CreateScene_MainMenu();
